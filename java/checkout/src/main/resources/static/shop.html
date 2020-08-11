@@ -1,0 +1,31 @@
+<html>
+<head>
+<style>
+body {
+  background-color: lightblue;
+}
+</style>
+</head>
+
+<body>
+<br /><p style="color:red">Place your Order!!!</p>
+  <img src="button.png" onclick="placeOrder()" style="width: 100px;"></img>
+  <div id="thanks"></div>
+</body>
+
+	<script type="text/javascript">
+    var count = 0;
+		function placeOrder() {
+			 $.ajax({
+              url: "./api/cart/order?customerId=150",
+              type: "put",
+              data: {}
+          }).done(function(result) {
+            count = count+1;
+            $('#thanks').html('Thank you for order #' + count + '.<br>Trace id: <b>' + JSON.parse(result).traceId + '</b>');
+          })
+		}
+	</script>
+  <script src="./jquery.min.js"></script>
+
+</html>
